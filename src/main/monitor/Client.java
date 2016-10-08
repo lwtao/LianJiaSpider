@@ -22,21 +22,21 @@ public class Client {
 		line();
 		con("");
 
-		String locationStr = getStr("输入搜索区域拼音，以英文逗号分隔");
+		String locationStr = "";//getStr("输入搜索区域拼音，以英文逗号分隔");
 		String[] locations = locationStr.trim().split(",");
 		List<String> locationList = new ArrayList<String>();
 
 		con("搜索区域" + locations.length + "个");
 
-		int lowerPrice = getInt("输入最低房价");
-		int upperPrice = getInt("输入最高房价");
+		int lowerPrice = 50;//getInt("输入最低房价");
+		int upperPrice = 150;//getInt("输入最高房价");
 
-		int lowerArea = getInt("输入最低房屋面积");
-		int upperArea = getInt("输入最高房屋面积");
+		int lowerArea = 50;//getInt("输入最低房屋面积");
+		int upperArea = 160;//getInt("输入最高房屋面积");
 
-		String nearSub = getStr("是否地铁房【Y/N】:");
-		String nearSchool = getStr("是否学区房【Y/N】:");
-		String fiveYears = getStr("是否满五唯一【Y/N】:");
+		String nearSub = "Y";//getStr("是否地铁房【Y/N】:");
+		String nearSchool = "Y";//getStr("是否学区房【Y/N】:");
+		String fiveYears = "N";//getStr("是否满五唯一【Y/N】:");
 
 		boolean nearSubBool = nearSub.toLowerCase().contains("y");
 		boolean nearSchoolBool = nearSchool.toLowerCase().contains("y");
@@ -62,7 +62,7 @@ public class Client {
 
 		con(conclusion.toString());
 
-		// LianJiaDataHelper dh = new LianJiaDataHelper();
+		 LianJiaDataHelper dh = new LianJiaDataHelper();
 		// dh.createTable();
 
 		List<String> URLS = LianJiaURLParser.genURL(locationList, lowerPrice,
@@ -95,7 +95,7 @@ public class Client {
 					con(s);
 				}
 
-				// dh.batchSaveHouse(list);
+				dh.batchSaveHouse(list);
 
 				System.out.println("");
 			} catch (Exception e) {

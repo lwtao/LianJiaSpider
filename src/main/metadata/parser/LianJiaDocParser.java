@@ -2,11 +2,13 @@ package main.metadata.parser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import main.metadata.metadata.LianJiaHouse;
 import main.metadata.metadata.LianJiaParams;
 import main.monitor.URLPool;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -16,7 +18,7 @@ import util.net.NetUtils;
 
 public class LianJiaDocParser {
 	
-	private static String houseListSelector = "ul#house-lst > li";
+	private static String houseListSelector = "ul.listContent> li";
 	
 	public static List<Document> getDocsViaURLS(List<String> URLS) throws Exception{
 		List<Document> docs = new ArrayList<Document>();
@@ -33,12 +35,12 @@ public class LianJiaDocParser {
 		for(Element li : lis){
 			try{
 				LianJiaHouse house = new LianJiaHouse();
-				String houseId = li.attr("data-id");
-				if(houseId == null || houseId.isEmpty())
-					continue;
-				String houseTitle = li.select("div.info-panel > h2 > a").attr("title");
-				String houseURL = LianJiaParams.BaseURL + li.select("div.info-panel > h2 > a").attr("href");
-				String regionURL = LianJiaParams.BaseURL + li.select("div.info-panel > div.col-1 > div.where > a").attr("href");
+//				String houseId = li.attr("data-id");
+//				if(houseId == null || houseId.isEmpty())
+//					continue;
+//				String houseTitle = li.select("div.info-panel > h2 > a").attr("title");
+				String houseURL = li.select("a.img").get(0).absUrl("href");
+				/*String regionURL = LianJiaParams.BaseURL + li.select("div.info-panel > div.col-1 > div.where > a").attr("href");
 				String houseLocation = li.select("div.info-panel > div.col-1 > div.where > a > span").text();
 				String houseRoom = li.select("div.info-panel > div.col-1 > div.where > span.zone > span").text();
 				String houseArea = li.select("div.info-panel > div.col-1 > div.where > span.meters").text();
@@ -72,8 +74,10 @@ public class LianJiaDocParser {
 				house.setHouseType(houseType);
 				house.setHouseHeight(houseHeight);
 				house.setHouseBuildType(houseBuildType);
-				house.setHouseBuildYear(houseBuildYear);
-				list.add(house);
+				house.setHouseBuildYear(houseBuildYear);*/
+
+
+				list.add(getDetail(houseURL));
 			} catch (Exception e){
 				e.printStackTrace();
 			}
@@ -106,6 +110,53 @@ public class LianJiaDocParser {
 	
 	
 	
-	
+	private static LianJiaHouse getDetail(String detailUrl){
+		try {
+			TimeUnit.MILLISECONDS.sleep(500L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		Document detailDocument = null;
+		try {
+			detailDocument = Jsoup.parse(NetUtils.httpGet(detailUrl));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String houseId = StringUtils.substringBefore(StringUtils.substringAfterLast(detailUrl,"/"),".");
+		String houseTitle = detailDocument.select(".title>h1.main").text();
+		String houseLocation = detailDocument.select(".areaName>span.info").text();
+		String houseRoom = detailDocument.select(".houseInfo>.room>.mainInfo").text();
+		String houseHeight = detailDocument.select(".houseInfo>.room>.subInfo").text();
+		String price = detailDocument.select(".price>.total").get(0).text();
+		String pricePerSquare = detailDocument.select(".unitPriceValue").get(0).text();
+		String houseType = detailDocument.select(".type>.subInfo").get(0).text();//精装
+		String houseBuildType = detailDocument.select(".type>.mainInfo").get(0).text();//南北
+		String communityName = detailDocument.select(".aroundInfo>.communityName>a.info").get(0).text();
+		String areaInfo = detailDocument.select(".houseInfo>.area>.mainInfo").get(0).text();
+		areaInfo = StringUtils.substringBefore(areaInfo,"平米");
+		String year = detailDocument.select(".houseInfo>.area>.subInfo").get(0).text();
+		year = StringUtils.substringBefore(year,"年");
+//                System.out.println("-------"+ price);
+		System.out.println("-------"+ communityName+","+areaInfo+","+price+","+year);
+		LianJiaHouse house = new LianJiaHouse();
+		house.setHouseId(houseId);
+		house.setHouseTitle(houseTitle);
+		house.setHouseLocation(houseLocation);
+		house.setHouseRoom(houseRoom);
+		house.setHouseArea(communityName);
+//		house.setHouseDirection(houseDirection);
+		house.setHousePrice(price);
+		house.setPricePerSquare(pricePerSquare);
+//		house.setDown(isDown);
+		house.setHouseURL(detailUrl);
+//		house.setRegionURL(regionURL);
+		house.setHouseType(houseType);
+		house.setHouseHeight(houseHeight);
+		house.setHouseBuildType(houseBuildType);
+		house.setHouseBuildYear(year);
+
+		return house;
+	}
 
 }
