@@ -1,20 +1,18 @@
 package main.metadata.parser;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import main.metadata.metadata.LianJiaHouse;
 import main.metadata.metadata.LianJiaParams;
 import main.monitor.URLPool;
-
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import util.net.NetUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class LianJiaDocParser {
 	
@@ -112,7 +110,7 @@ public class LianJiaDocParser {
 	
 	private static LianJiaHouse getDetail(String detailUrl){
 		try {
-			TimeUnit.MILLISECONDS.sleep(500L);
+			TimeUnit.MILLISECONDS.sleep(1000L);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -127,11 +125,12 @@ public class LianJiaDocParser {
 		String houseTitle = detailDocument.select(".title>h1.main").text();
 		String houseLocation = detailDocument.select(".areaName>span.info").text();
 		String houseRoom = detailDocument.select(".houseInfo>.room>.mainInfo").text();
+		String square = detailDocument.select(".houseInfo>.room>.mainInfo").text();//面积
 		String houseHeight = detailDocument.select(".houseInfo>.room>.subInfo").text();
 		String price = detailDocument.select(".price>.total").get(0).text();
 		String pricePerSquare = detailDocument.select(".unitPriceValue").get(0).text();
 		String houseType = detailDocument.select(".type>.subInfo").get(0).text();//精装
-		String houseBuildType = detailDocument.select(".type>.mainInfo").get(0).text();//南北
+		String direction = detailDocument.select(".type>.mainInfo").get(0).text();//南北
 		String communityName = detailDocument.select(".aroundInfo>.communityName>a.info").get(0).text();
 		String areaInfo = detailDocument.select(".houseInfo>.area>.mainInfo").get(0).text();
 		areaInfo = StringUtils.substringBefore(areaInfo,"平米");
@@ -142,10 +141,10 @@ public class LianJiaDocParser {
 		LianJiaHouse house = new LianJiaHouse();
 		house.setHouseId(houseId);
 		house.setHouseTitle(houseTitle);
-		house.setHouseLocation(houseLocation);
+		house.setHouseLocation(communityName);
 		house.setHouseRoom(houseRoom);
-		house.setHouseArea(communityName);
-//		house.setHouseDirection(houseDirection);
+		house.setHouseArea(areaInfo);
+		house.setHouseDirection(direction);
 		house.setHousePrice(price);
 		house.setPricePerSquare(pricePerSquare);
 //		house.setDown(isDown);
@@ -153,7 +152,7 @@ public class LianJiaDocParser {
 //		house.setRegionURL(regionURL);
 		house.setHouseType(houseType);
 		house.setHouseHeight(houseHeight);
-		house.setHouseBuildType(houseBuildType);
+		house.setHouseBuildType(houseLocation);
 		house.setHouseBuildYear(year);
 
 		return house;

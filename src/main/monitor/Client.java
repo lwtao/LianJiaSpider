@@ -1,18 +1,17 @@
 package main.monitor;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
 import main.metadata.metadata.LianJiaHouse;
 import main.metadata.metadata.LianJiaParams;
 import main.metadata.parser.LianJiaDocParser;
 import main.metadata.parser.LianJiaURLParser;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import util.database.LianJiaDataHelper;
 import util.net.NetUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Client {
 
@@ -34,7 +33,7 @@ public class Client {
 		int lowerArea = 50;//getInt("输入最低房屋面积");
 		int upperArea = 160;//getInt("输入最高房屋面积");
 
-		String nearSub = "Y";//getStr("是否地铁房【Y/N】:");
+		String nearSub = "N";//getStr("是否地铁房【Y/N】:");
 		String nearSchool = "Y";//getStr("是否学区房【Y/N】:");
 		String fiveYears = "N";//getStr("是否满五唯一【Y/N】:");
 

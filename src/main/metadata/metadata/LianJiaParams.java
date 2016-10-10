@@ -5,7 +5,8 @@ import java.util.HashMap;
 public class LianJiaParams {
 	
 	
-	public static String BaseURL = "http://cs.lianjia.com";
+	public static String BaseURL = "http://sz.lianjia.com";
+	//public static String BaseURL = "http://cs.lianjia.com";
 	public static String URLSlash = "/";
 	public static String SecondHanded = "ershoufang";
 	

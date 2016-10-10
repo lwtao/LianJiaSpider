@@ -1,15 +1,16 @@
 package util.database;
 
+import main.metadata.metadata.LianJiaHouse;
+import util.DateUtils;
+
 import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
-import util.DateUtils;
-import main.metadata.metadata.LianJiaHouse;
-
 public class LianJiaDataHelper {
 
-	static String tableName = "lianjia_table";
+	static String tableName = "lianjia_table_sz";
+	//static String tableName = "lianjia_table";
 	static String houseIdCol = "house_id";
 	static String houseTitleCol = "house_title";
 	static String houseLocationCol = "house_location";
@@ -71,8 +72,10 @@ public class LianJiaDataHelper {
 		} 
 		
 			for(LianJiaHouse house : houses){
+
+
 				String insertSql = String
-						.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s','%s', '%s', '%s','%s')",
+						.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,create_time) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s','%s', '%s', '%s','%s',now())",
 								tableName, 
 								houseIdCol, houseTitleCol, houseLocationCol,
 								houseRoomCol, houseAreaCol, houseDirectionCol,
@@ -102,6 +105,10 @@ public class LianJiaDataHelper {
 			return true;
 		
 		
+	}
+
+	private void getHouseById(String houseId){
+		String sql = "select * from lianjia_table where house_id='"+houseId+"'";
 	}
 
 	public boolean createTable() throws Exception {
