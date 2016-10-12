@@ -9,8 +9,8 @@ import java.util.List;
 
 public class LianJiaDataHelper {
 
-	static String tableName = "lianjia_table_sz";
-	//static String tableName = "lianjia_table";
+	//static String tableName = "lianjia_table_sz";
+	static String tableName = "lianjia_table";
 	static String houseIdCol = "house_id";
 	static String houseTitleCol = "house_title";
 	static String houseLocationCol = "house_location";
