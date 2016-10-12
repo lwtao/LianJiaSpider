@@ -16,11 +16,43 @@ public class LianJiaHouse {
 	private String houseHeight;
 	private String houseBuildYear;
 	private String houseBuildType;
-	
-	
-	
-	
-	
+	private String listingDate;
+	private int status;
+	private int seeTimes;
+	private int seeTimesLastWeek;
+
+	public String getListingDate() {
+		return listingDate;
+	}
+
+	public void setListingDate(String listingDate) {
+		this.listingDate = listingDate;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public int getSeeTimes() {
+		return seeTimes;
+	}
+
+	public void setSeeTimes(int seeTimes) {
+		this.seeTimes = seeTimes;
+	}
+
+	public int getSeeTimesLastWeek() {
+		return seeTimesLastWeek;
+	}
+
+	public void setSeeTimesLastWeek(int seeTimesLastWeek) {
+		this.seeTimesLastWeek = seeTimesLastWeek;
+	}
+
 	public String getHouseType() {
 		return houseType;
 	}

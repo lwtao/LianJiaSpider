@@ -33,13 +33,12 @@ public class LianJiaDataHelper {
 	public boolean saveHouse(LianJiaHouse house) throws Exception {
 
 		String insertSql = String
-				.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s','%s', '%s', '%s','%s')",
-						tableName, 
-						houseIdCol, houseTitleCol, houseLocationCol,
-						houseRoomCol, houseAreaCol, houseDirectionCol,
-						housePriceCol, pricePerSquareCol, houseURLCol,
-						regionURLCol, isDownCol, createDateCol, houseTypeCol,
-						houseHeightCol,houseBuildYearCol,houseBuildTypeCol,
+				.format("INSERT INTO %s ( house_id, house_title, house_location, house_room, house_area, house_direction, " +
+								"house_price, price_per_square, house_url, region_url, is_down, create_date, house_type, " +
+								"house_height , house_build_year,house_build_type,listing_date) " +
+						"VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s','%s', " +
+								"'%s', '%s','%s','%s') on DEALLOCATE key UPDATE status=%s,see_times=%s,see_times_last_week=%s",
+						tableName,
 						house.getHouseId(),
 						house.getHouseTitle(), house.getHouseLocation(),
 						house.getHouseRoom(), house.getHouseArea(),
@@ -47,7 +46,8 @@ public class LianJiaDataHelper {
 						house.getPricePerSquare(), house.getHouseURL(),
 						house.getRegionURL(), (house.isDown() ? 1 : 0),
 						DateUtils.dateToString(new Date(), DateUtils.yyyyMMdd), house.getHouseType(), house.getHouseHeight(),
-						house.getHouseBuildYear(), house.getHouseBuildType());
+						house.getHouseBuildYear(), house.getHouseBuildType(),house.getListingDate(),house.getStatus(),
+						house.getSeeTimes(),house.getSeeTimesLastWeek());
 						
 		try {
 			con = MysqlPool.getInstance().getConnection();

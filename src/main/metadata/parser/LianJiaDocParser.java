@@ -125,7 +125,8 @@ public class LianJiaDocParser {
 		String houseTitle = detailDocument.select(".title>h1.main").text();
 		String houseLocation = detailDocument.select(".areaName>span.info").text();
 		String houseRoom = detailDocument.select(".houseInfo>.room>.mainInfo").text();
-		String square = detailDocument.select(".houseInfo>.room>.mainInfo").text();//面积
+		int seeTimes = getInt(detailDocument.select("#record>.panel>.count").text());
+		int seeTimesLastWeek = getInt(detailDocument.select("#record>.panel>.totalCount>span").text());
 		String houseHeight = detailDocument.select(".houseInfo>.room>.subInfo").text();
 		String price = detailDocument.select(".price>.total").get(0).text();
 		String pricePerSquare = detailDocument.select(".unitPriceValue").get(0).text();
@@ -133,7 +134,7 @@ public class LianJiaDocParser {
 		String direction = detailDocument.select(".type>.mainInfo").get(0).text();//南北
 		String communityName = detailDocument.select(".aroundInfo>.communityName>a.info").get(0).text();
 		String areaInfo = detailDocument.select(".houseInfo>.area>.mainInfo").get(0).text();
-		areaInfo = StringUtils.substringBefore(areaInfo,"平米");
+		areaInfo = StringUtils.substringBefore(areaInfo,"平米");//面积
 		String year = detailDocument.select(".houseInfo>.area>.subInfo").get(0).text();
 		year = StringUtils.substringBefore(year,"年");
 //                System.out.println("-------"+ price);
@@ -154,8 +155,18 @@ public class LianJiaDocParser {
 		house.setHouseHeight(houseHeight);
 		house.setHouseBuildType(houseLocation);
 		house.setHouseBuildYear(year);
+		house.setSeeTimes(seeTimes);
+		house.setSeeTimesLastWeek(seeTimesLastWeek);
 
 		return house;
+	}
+
+	private static int getInt(String str){
+		try {
+			return Integer.parseInt(str);
+		}catch (Exception e){
+			return 0;
+		}
 	}
 
 }
