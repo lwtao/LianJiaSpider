@@ -1,5 +1,7 @@
 package main.metadata.parser;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import main.metadata.metadata.LianJiaHouse;
 import main.metadata.metadata.LianJiaParams;
 import main.monitor.URLPool;
@@ -127,6 +129,14 @@ public class LianJiaDocParser {
 		String houseRoom = detailDocument.select(".houseInfo>.room>.mainInfo").text();
 		int seeTimes = getInt(detailDocument.select("#record>.panel>.count").text());
 		int seeTimesLastWeek = getInt(detailDocument.select("#record>.panel>.totalCount>span").text());
+		Elements transactions = detailDocument.select(".introContent>.transaction>.content>ul>li");
+		String listingData = "";
+		for (Element transaction : transactions) {
+			if (StringUtils.contains(transaction.text(),"挂牌时间")){
+				listingData = StringUtils.substringAfter(transaction.text(),"挂牌时间");
+				break;
+			}
+		}
 		String houseHeight = detailDocument.select(".houseInfo>.room>.subInfo").text();
 		String price = detailDocument.select(".price>.total").get(0).text();
 		String pricePerSquare = detailDocument.select(".unitPriceValue").get(0).text();
@@ -155,10 +165,22 @@ public class LianJiaDocParser {
 		house.setHouseHeight(houseHeight);
 		house.setHouseBuildType(houseLocation);
 		house.setHouseBuildYear(year);
-		house.setSeeTimes(seeTimes);
-		house.setSeeTimesLastWeek(seeTimesLastWeek);
-
+		setSeeRecord(house);
+		house.setListingDate(listingData);
 		return house;
+	}
+
+	private static void setSeeRecord(LianJiaHouse lianJiaHouse){
+		try {
+			String json = NetUtils.httpGet(LianJiaParams.seeRecordUrl + lianJiaHouse.getHouseId());
+			JSONObject seeRecord = JSON.parseObject(json).getJSONObject("data").getJSONObject("seeRecord");
+			int thisWeek = seeRecord.getIntValue("thisWeek");
+			int totalCnt = seeRecord.getIntValue("totalCnt");
+			lianJiaHouse.setSeeTimesLastWeek(thisWeek);
+			lianJiaHouse.setSeeTimes(totalCnt);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static int getInt(String str){

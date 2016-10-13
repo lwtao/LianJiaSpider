@@ -7,6 +7,7 @@ public class LianJiaParams {
 	
 	//public static String BaseURL = "http://sz.lianjia.com";
 	public static String BaseURL = "http://cs.lianjia.com";
+	public static String seeRecordUrl = "http://cs.lianjia.com/ershoufang/housestat?rid=3511063262381&hid=";
 	public static String URLSlash = "/";
 	public static String SecondHanded = "ershoufang";
 	
