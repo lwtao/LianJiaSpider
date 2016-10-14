@@ -6,6 +6,7 @@ import main.metadata.parser.LianJiaDocParser;
 import main.metadata.parser.LianJiaURLParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import util.MyConstants;
 import util.database.LianJiaDataHelper;
 import util.net.NetUtils;
 
@@ -30,15 +31,31 @@ public class Monitor {
 //		List<String> URLS = LianJiaURLParser.genURL(locations, 0, 500, -1,
 //				-1, LianJiaParams.roomCountKey_THREE, null, directions, false,
 //				false, false);
-		URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 40, 150, 50,
-				160, LianJiaParams.roomCountKey_THREE, LianJiaParams.roomAgeKey_TEN, directions, false,
-				false, true));
-		URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 40, 150, 50,
-				160, LianJiaParams.roomCountKey_TWO, LianJiaParams.roomAgeKey_TEN, directions, false,
-				false, true));
-		URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 40, 150, 50,
-				160, LianJiaParams.roomCountKey_FOUR, LianJiaParams.roomAgeKey_TEN, directions, false,
-				false, true));
+		if (MyConstants.CURRENT_CITY.equals("cs")){
+			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 40, 150, 50,
+					160, LianJiaParams.roomCountKey_THREE, LianJiaParams.roomAgeKey_TEN, directions, false,
+					false, true));
+			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 40, 150, 50,
+					160, LianJiaParams.roomCountKey_TWO, LianJiaParams.roomAgeKey_TEN, directions, false,
+					false, true));
+			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 40, 150, 50,
+					160, LianJiaParams.roomCountKey_FOUR, LianJiaParams.roomAgeKey_TEN, directions, false,
+					false, true));
+		}else {
+			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 250, 400, 50,
+					120, LianJiaParams.roomCountKey_THREE, LianJiaParams.roomAgeKey_TEN, directions, false,
+					false, false));
+			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 250, 400, 50,
+					120, LianJiaParams.roomCountKey_TWO, LianJiaParams.roomAgeKey_TEN, directions, false,
+					false, false));
+			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 250, 400, 50,
+					120, LianJiaParams.roomCountKey_THREE, LianJiaParams.roomAgeKey_TEN2TWENTY, directions, false,
+					false, false));
+			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 250, 400, 50,
+					120, LianJiaParams.roomCountKey_TWO, LianJiaParams.roomAgeKey_TEN2TWENTY, directions, false,
+					false, false));
+		}
+
 
 		//URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 250, 400, 50,
 		//		120, LianJiaParams.roomCountKey_THREE, LianJiaParams.roomAgeKey_TEN, directions, false,

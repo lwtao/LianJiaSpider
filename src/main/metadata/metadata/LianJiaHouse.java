@@ -4,6 +4,7 @@ public class LianJiaHouse {
 	private String houseId;
 	private String houseTitle;
 	private String houseLocation;
+	private String communityId;
 	private String houseRoom;
 	private String houseArea;
 	private String houseDirection;
@@ -20,6 +21,23 @@ public class LianJiaHouse {
 	private int status;
 	private int seeTimes;
 	private int seeTimesLastWeek;
+	private String city;
+
+	public String getCommunityId() {
+		return communityId;
+	}
+
+	public void setCommunityId(String communityId) {
+		this.communityId = communityId;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
 
 	public String getListingDate() {
 		return listingDate;

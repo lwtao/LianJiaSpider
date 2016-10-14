@@ -1,13 +1,15 @@
 package main.metadata.metadata;
 
+import util.MyConstants;
+
 import java.util.HashMap;
 
 public class LianJiaParams {
 	
 	
 	//public static String BaseURL = "http://sz.lianjia.com";
-	public static String BaseURL = "http://cs.lianjia.com";
-	public static String seeRecordUrl = "http://cs.lianjia.com/ershoufang/housestat?rid=3511063262381&hid=";
+	public static String BaseURL = "http://"+ MyConstants.CURRENT_CITY+".lianjia.com";
+	public static String seeRecordUrl = "http://"+ MyConstants.CURRENT_CITY+".lianjia.com/ershoufang/housestat?rid=communityId&hid=houseId";
 	public static String URLSlash = "/";
 	public static String SecondHanded = "ershoufang";
 	
