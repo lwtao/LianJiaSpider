@@ -30,14 +30,30 @@ public class LianJiaDataHelper {
 
 	Connection con = null;
 
-	public boolean saveHouse(LianJiaHouse house) throws Exception {
+	/*public boolean saveHouse(LianJiaHouse house) throws Exception {
 
+		//String insertSql = String
+		//		.format("INSERT INTO %s ( house_id, house_title, house_location, house_room, house_area, house_direction, " +
+		//						"house_price, price_per_square, house_url, region_url, is_down, create_date, house_type, " +
+		//						"house_height , house_build_year,house_build_type,listing_date) " +
+		//				"VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s','%s', " +
+		//						"'%s', '%s','%s','%s') on DEALLOCATE key UPDATE status=%s,see_times=%s,see_times_last_week=%s",
+		//				tableName,
+		//				house.getHouseId(),
+		//				house.getHouseTitle(), house.getHouseLocation(),
+		//				house.getHouseRoom(), house.getHouseArea(),
+		//				house.getHouseDirection(), house.getHousePrice(),
+		//				house.getPricePerSquare(), house.getHouseURL(),
+		//				house.getRegionURL(), (house.isDown() ? 1 : 0),
+		//				DateUtils.dateToString(new Date(), DateUtils.yyyyMMdd), house.getHouseType(), house.getHouseHeight(),
+		//				house.getHouseBuildYear(), house.getHouseBuildType(),house.getListingDate(),house.getStatus(),
+		//				house.getSeeTimes(),house.getSeeTimesLastWeek());
 		String insertSql = String
 				.format("INSERT INTO %s ( house_id, house_title, house_location, house_room, house_area, house_direction, " +
 								"house_price, price_per_square, house_url, region_url, is_down, create_date, house_type, " +
 								"house_height , house_build_year,house_build_type,listing_date) " +
-						"VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s','%s', " +
-								"'%s', '%s','%s','%s') on DEALLOCATE key UPDATE status=%s,see_times=%s,see_times_last_week=%s",
+								"VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s','%s', " +
+								"'%s', '%s','%s','%s') ",
 						tableName,
 						house.getHouseId(),
 						house.getHouseTitle(), house.getHouseLocation(),
@@ -46,9 +62,8 @@ public class LianJiaDataHelper {
 						house.getPricePerSquare(), house.getHouseURL(),
 						house.getRegionURL(), (house.isDown() ? 1 : 0),
 						DateUtils.dateToString(new Date(), DateUtils.yyyyMMdd), house.getHouseType(), house.getHouseHeight(),
-						house.getHouseBuildYear(), house.getHouseBuildType(),house.getListingDate(),house.getStatus(),
-						house.getSeeTimes(),house.getSeeTimesLastWeek());
-						
+						house.getHouseBuildYear(), house.getHouseBuildType(),house.getListingDate());
+
 		try {
 			con = MysqlPool.getInstance().getConnection();
 			con.createStatement().execute(insertSql);
@@ -61,7 +76,7 @@ public class LianJiaDataHelper {
 				con.close();
 		}
 
-	}
+	}*/
 	
 	public boolean batchSaveHouse(List<LianJiaHouse> houses) throws Exception {
 		try{
@@ -74,7 +89,7 @@ public class LianJiaDataHelper {
 			for(LianJiaHouse house : houses){
 
 
-				String insertSql = String
+				/*String insertSql = String
 						.format("INSERT INTO %s ( house_id, house_title, house_location, house_room, house_area, house_direction, " +
 										"house_price, price_per_square, house_url, region_url, is_down, create_date, house_type, " +
 										"house_height , house_build_year,house_build_type,listing_date,city,status,see_times,see_times_last_week) " +
@@ -90,6 +105,22 @@ public class LianJiaDataHelper {
 								DateUtils.dateToString(new Date(), DateUtils.yyyyMMdd), house.getHouseType(), house.getHouseHeight(),
 								house.getHouseBuildYear(), house.getHouseBuildType(),house.getListingDate(),house.getCity(),house.getStatus(),
 								house.getSeeTimes(),house.getSeeTimesLastWeek(),house.getStatus(),
+								house.getSeeTimes(),house.getSeeTimesLastWeek());*/
+				String insertSql = String
+						.format("INSERT INTO %s ( house_id, house_title, house_location, house_room, house_area, house_direction, " +
+										"house_price, price_per_square, house_url, region_url, is_down, create_date, house_type, " +
+										"house_height , house_build_year,house_build_type,listing_date,city,status,see_times,see_times_last_week) " +
+										"VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s', '%s','%s','%s', " +
+										"'%s', '%s','%s','%s', %s,%s,%s)",
+								tableName,
+								house.getHouseId(),
+								house.getHouseTitle(), house.getHouseLocation(),
+								house.getHouseRoom(), house.getHouseArea(),
+								house.getHouseDirection(), house.getHousePrice(),
+								house.getPricePerSquare(), house.getHouseURL(),
+								house.getRegionURL(), (house.isDown() ? 1 : 0),
+								DateUtils.dateToString(new Date(), DateUtils.yyyyMMdd), house.getHouseType(), house.getHouseHeight(),
+								house.getHouseBuildYear(), house.getHouseBuildType(),house.getListingDate(),house.getCity(),house.getStatus(),
 								house.getSeeTimes(),house.getSeeTimesLastWeek());
 				try{
 					con.createStatement().execute(insertSql);

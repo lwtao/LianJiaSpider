@@ -90,7 +90,7 @@ public class LianJiaDocParser {
             String totalPage = pageDatas[0].split(":")[1];
             String hrefTemplet = pageLinks.attr("page-url");
             String currentPage = pageDatas[1].split(":")[1].substring(0, pageDatas[1].split(":")[1].length() - 1);
-            if (!currentPage.equals(totalPage)) {
+            if (Integer.parseInt(currentPage) <= 60 && !currentPage.equals(totalPage)) {
                 String nextPage = String.valueOf((Integer.valueOf(currentPage) + 1));
                 String nextURL = LianJiaParams.BaseURL + hrefTemplet.replace("{page}", nextPage);
                 // System.out.println("URL ADD:"+nextURL);
@@ -102,7 +102,7 @@ public class LianJiaDocParser {
 
     private static LianJiaHouse getDetail(String detailUrl) {
         try {
-            TimeUnit.MILLISECONDS.sleep(2000L);
+            TimeUnit.MILLISECONDS.sleep(100L);
         }
         catch (InterruptedException e) {
             e.printStackTrace();
@@ -111,6 +111,9 @@ public class LianJiaDocParser {
         Document detailDocument = null;
         try {
             detailDocument = Jsoup.parse(NetUtils.httpGet(detailUrl));
+            if (detailDocument.select(".price>.total").size() == 0) {
+                detailDocument = Jsoup.parse(NetUtils.httpGet(detailUrl));
+            }
         }
         catch (Exception e) {
             e.printStackTrace();

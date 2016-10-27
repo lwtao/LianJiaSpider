@@ -1,9 +1,7 @@
 package main.monitor;
 
 import main.metadata.metadata.LianJiaHouse;
-import main.metadata.metadata.LianJiaParams;
 import main.metadata.parser.LianJiaDocParser;
-import main.metadata.parser.LianJiaURLParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import util.MyConstants;
@@ -32,7 +30,7 @@ public class Monitor {
 //				-1, LianJiaParams.roomCountKey_THREE, null, directions, false,
 //				false, false);
 		if (MyConstants.CURRENT_CITY.equals("cs")){
-			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 40, 150, 50,
+		/*	URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 40, 150, 50,
 					160, LianJiaParams.roomCountKey_THREE, LianJiaParams.roomAgeKey_TEN, directions, false,
 					false, true));
 			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 40, 150, 50,
@@ -40,9 +38,10 @@ public class Monitor {
 					false, true));
 			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 40, 150, 50,
 					160, LianJiaParams.roomCountKey_FOUR, LianJiaParams.roomAgeKey_TEN, directions, false,
-					false, true));
+					false, true));*/
+			URLPool.getInstance().pushURL("http://cs.lianjia.com/ershoufang/pg1y2l3l4a3a4a5a6p3p4p5/");
 		}else {
-			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 250, 400, 50,
+			/*URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 250, 400, 50,
 					120, LianJiaParams.roomCountKey_THREE, LianJiaParams.roomAgeKey_TEN, directions, false,
 					false, false));
 			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 250, 400, 50,
@@ -52,8 +51,9 @@ public class Monitor {
 					120, LianJiaParams.roomCountKey_THREE, LianJiaParams.roomAgeKey_TEN2TWENTY, directions, false,
 					false, false));
 			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 250, 400, 50,
-					120, LianJiaParams.roomCountKey_TWO, LianJiaParams.roomAgeKey_TEN2TWENTY, directions, false,
-					false, false));
+					120, LianJiaParams.roomCountKey_TWO, LianJiaParams.roomAgeKey_TEN2TWENTY, tions, false,
+					false, false));*/
+			URLPool.getInstance().pushURL("http://sz.lianjia.com/ershoufang/hu1de2de1pg1co52y4l2l3a2a3a4p2p3p4/");
 		}
 
 

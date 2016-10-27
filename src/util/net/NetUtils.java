@@ -1,5 +1,11 @@
 package util.net;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -7,14 +13,6 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.util.HashMap;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 public class NetUtils {
 
@@ -25,7 +23,9 @@ public class NetUtils {
 	}
 	
 	public static String httpGet(String pageUrl) throws Exception{
-		return getAction(pageUrl, null);
+		HttpHeader httpHeader = new HttpHeader();
+		httpHeader.addParam("Cookie","lianjia_ssid=46fd9620-52f4-4ac3-b837-a7ef15896803; lianjia_uuid=4b9629fe-0dc3-4375-b0d4-9a53f97ab3fb");
+		return getAction(pageUrl, httpHeader);
 	}
 	
 	private static String getAction(String pageUrl, HttpHeader header) throws Exception{
