@@ -53,7 +53,7 @@ public class Monitor {
 			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 250, 400, 50,
 					120, LianJiaParams.roomCountKey_TWO, LianJiaParams.roomAgeKey_TEN2TWENTY, tions, false,
 					false, false));*/
-			URLPool.getInstance().pushURL("http://sz.lianjia.com/ershoufang/hu1de2de1pg1co52y4l2l3a2a3a4p2p3p4/");
+			URLPool.getInstance().pushURL("http://sz.lianjia.com/ershoufang/hu1de2de1pg1co52y4l2l3a2a3a4a5p2p3p4p5/");
 		}
 
 
@@ -85,6 +85,11 @@ public class Monitor {
 				String content = NetUtils.httpGet(URL);
 				Document doc = Jsoup.parse(content);
 				List<LianJiaHouse> list = LianJiaDocParser.getHouseList(doc);
+				if (list== null || list.size()==0){
+					content = NetUtils.httpGet(URL);
+					doc = Jsoup.parse(content);
+					list = LianJiaDocParser.getHouseList(doc);
+				}
 				for(LianJiaHouse house : list){
 					String s = house.getHouseTitle() + "\t" + house.getHouseLocation() + "\t" + house.getHousePrice() + "\t" + house.getPricePerSquare() + "\t" + "\t降价:" + house.isDown();
 					System.out.println(s);

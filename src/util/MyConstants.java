@@ -12,7 +12,7 @@ package util;
  */
 public class MyConstants {
 
-    //public static final String CURRENT_CITY = "sz";
-    public static final String CURRENT_CITY = "cs";
+    public static final String CURRENT_CITY = "sz";
+    //public static final String CURRENT_CITY = "cs";
 
 }

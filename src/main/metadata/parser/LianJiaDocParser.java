@@ -35,7 +35,7 @@ public class LianJiaDocParser {
         Elements lis = doc.select(houseListSelector);
         for (Element li : lis) {
             try {
-                LianJiaHouse house = new LianJiaHouse();
+                //LianJiaHouse house = new LianJiaHouse();
                 // String houseId = li.attr("data-id");
                 // if(houseId == null || houseId.isEmpty())
                 // continue;
@@ -90,7 +90,7 @@ public class LianJiaDocParser {
             String totalPage = pageDatas[0].split(":")[1];
             String hrefTemplet = pageLinks.attr("page-url");
             String currentPage = pageDatas[1].split(":")[1].substring(0, pageDatas[1].split(":")[1].length() - 1);
-            if (Integer.parseInt(currentPage) <= 60 && !currentPage.equals(totalPage)) {
+            if (Integer.parseInt(currentPage) <= 100 && !currentPage.equals(totalPage)) {
                 String nextPage = String.valueOf((Integer.valueOf(currentPage) + 1));
                 String nextURL = LianJiaParams.BaseURL + hrefTemplet.replace("{page}", nextPage);
                 // System.out.println("URL ADD:"+nextURL);
