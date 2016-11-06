@@ -21,7 +21,9 @@ public class LianJiaDocParser {
 
     private static String houseListSelector = "ul.listContent> li";
 
-    public static List<Document> getDocsViaURLS(List<String> URLS) throws Exception {
+    public boolean canDuplicate = true;
+
+    public List<Document> getDocsViaURLS(List<String> URLS) throws Exception {
         List<Document> docs = new ArrayList<Document>();
         for (String URL : URLS) {
             Document doc = Jsoup.parse(NetUtils.httpGet(URL));
@@ -30,7 +32,7 @@ public class LianJiaDocParser {
         return docs;
     }
 
-    public static List<LianJiaHouse> getHouseList(Document doc) {
+    public List<LianJiaHouse> getHouseList(Document doc) {
         List<LianJiaHouse> list = new ArrayList<LianJiaHouse>();
         Elements lis = doc.select(houseListSelector);
         for (Element li : lis) {
@@ -82,7 +84,7 @@ public class LianJiaDocParser {
         return list;
     }
 
-    public static void detectNextPage(Document doc) {
+    public void detectNextPage(Document doc) {
         Elements pageLinks = doc.select("div.page-box, div.house-lst-page-box");
         String pageDataStr = pageLinks.attr("page-data");
         String[] pageDatas = pageDataStr.split(",");
@@ -100,7 +102,7 @@ public class LianJiaDocParser {
 
     }
 
-    private static LianJiaHouse getDetail(String detailUrl) {
+    public LianJiaHouse getDetail(String detailUrl) {
         try {
             TimeUnit.MILLISECONDS.sleep(100L);
         }
@@ -167,7 +169,7 @@ public class LianJiaDocParser {
         return house;
     }
 
-    private static void setSeeRecord(LianJiaHouse lianJiaHouse) {
+    public void setSeeRecord(LianJiaHouse lianJiaHouse) {
         try {
             String json = NetUtils.httpGet(LianJiaParams.seeRecordUrl.replace("communityId",
                                                                               lianJiaHouse.getCommunityId())

@@ -84,7 +84,7 @@ public class Client {
 						.println("--------------HouseList--------------------------");
 				String content = NetUtils.httpGet(URL);
 				Document doc = Jsoup.parse(content);
-				List<LianJiaHouse> list = LianJiaDocParser.getHouseList(doc);
+				List<LianJiaHouse> list = new LianJiaDocParser().getHouseList(doc);
 				for (LianJiaHouse house : list) {
 					String s = house.getHouseTitle() + "\t"
 							+ house.getHouseLocation() + "\t"
