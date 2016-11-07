@@ -9,6 +9,7 @@ import util.MyConstants;
 import util.database.LianJiaDataHelper;
 import util.net.NetUtils;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,6 +88,8 @@ public class Monitor {
 				System.out.println("--------------HouseList--------------------------");
 				String content = NetUtils.httpGet(URL);
 				Document doc = Jsoup.parse(content);
+				URI uri = new URI(URL);
+				doc.setBaseUri(uri.getScheme()+ "://"+ uri.getHost());
 				List<LianJiaHouse> list = lianJiaDocParser.getHouseList(doc);
 				if (list== null || list.size()==0){
 					content = NetUtils.httpGet(URL);

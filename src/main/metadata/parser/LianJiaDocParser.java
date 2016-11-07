@@ -85,16 +85,16 @@ public class LianJiaDocParser {
     }
 
     public void detectNextPage(Document doc) {
-        Elements pageLinks = doc.select("div.page-box, div.house-lst-page-box");
+        Elements pageLinks = doc.select("div.page-box>div.house-lst-page-box");
         String pageDataStr = pageLinks.attr("page-data");
         String[] pageDatas = pageDataStr.split(",");
         if (pageDatas.length == 2) {
             String totalPage = pageDatas[0].split(":")[1];
-            String hrefTemplet = pageLinks.attr("page-url");
+            String hrefTemplet = pageLinks.get(0).absUrl("page-url");
             String currentPage = pageDatas[1].split(":")[1].substring(0, pageDatas[1].split(":")[1].length() - 1);
             if (Integer.parseInt(currentPage) <= 100 && !currentPage.equals(totalPage)) {
                 String nextPage = String.valueOf((Integer.valueOf(currentPage) + 1));
-                String nextURL = LianJiaParams.BaseURL + hrefTemplet.replace("{page}", nextPage);
+                String nextURL = hrefTemplet.replace("{page}", nextPage);
                 // System.out.println("URL ADD:"+nextURL);
                 URLPool.getInstance().pushURL(nextURL);
             }

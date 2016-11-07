@@ -161,6 +161,31 @@ public class LianJiaHouse {
 	public void setHouseDirection(String houseDirection) {
 		this.houseDirection = houseDirection;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "LianJiaHouse{" +
+				"houseId='" + houseId + '\'' +
+				", houseTitle='" + houseTitle + '\'' +
+				", houseLocation='" + houseLocation + '\'' +
+				", communityId='" + communityId + '\'' +
+				", houseRoom='" + houseRoom + '\'' +
+				", houseArea='" + houseArea + '\'' +
+				", houseDirection='" + houseDirection + '\'' +
+				", housePrice='" + housePrice + '\'' +
+				", pricePerSquare='" + pricePerSquare + '\'' +
+				", houseURL='" + houseURL + '\'' +
+				", regionURL='" + regionURL + '\'' +
+				", isDown=" + isDown +
+				", houseType='" + houseType + '\'' +
+				", houseHeight='" + houseHeight + '\'' +
+				", houseBuildYear='" + houseBuildYear + '\'' +
+				", houseBuildType='" + houseBuildType + '\'' +
+				", listingDate='" + listingDate + '\'' +
+				", status=" + status +
+				", seeTimes=" + seeTimes +
+				", seeTimesLastWeek=" + seeTimesLastWeek +
+				", city='" + city + '\'' +
+				'}';
+	}
 }

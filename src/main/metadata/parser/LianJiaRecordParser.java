@@ -71,6 +71,8 @@ public class LianJiaRecordParser extends LianJiaDocParser {
 
         house.setListingDate(dealDate);
         house.setCity("xx");
+
+        System.out.println(house);
         return house;
     }
 }
