@@ -17,11 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class LianJiaDocParser {
-
-    private static String houseListSelector = "ul.sellListContent> li";
-
-    public boolean canDuplicate = true;
+public class LianJiaDocParser implements BaseParser {
 
     public List<Document> getDocsViaURLS(List<String> URLS) throws Exception {
         List<Document> docs = new ArrayList<Document>();
@@ -32,9 +28,14 @@ public class LianJiaDocParser {
         return docs;
     }
 
+    @Override
+    public boolean canDuplicate() {
+        return true;
+    }
+
     public List<LianJiaHouse> getHouseList(Document doc) {
         List<LianJiaHouse> list = new ArrayList<LianJiaHouse>();
-        Elements lis = doc.select(houseListSelector);
+        Elements lis = doc.select("ul.sellListContent> li");
         for (Element li : lis) {
             try {
                 //LianJiaHouse house = new LianJiaHouse();

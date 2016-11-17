@@ -18,9 +18,12 @@ import java.util.concurrent.TimeUnit;
  * @history 2016/11/6 liuwentao 新建
  * @since 2016/11/6 21:27
  */
-public class LianJiaRecordParser extends LianJiaDocParser {
+public class LianJiaRecordParser extends LianJiaDocParser implements BaseParser {
 
-    public boolean canDuplicate = false;
+    @Override
+    public boolean canDuplicate() {
+        return false;
+    }
 
     @Override
     public LianJiaHouse getDetail(String detailUrl) {
