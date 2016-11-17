@@ -57,7 +57,7 @@ public class Monitor {
 			URLPool.getInstance().batchPush(LianJiaURLParser.genURL(locations, 250, 400, 50,
 					120, LianJiaParams.roomCountKey_TWO, LianJiaParams.roomAgeKey_TEN2TWENTY, tions, false,
 					false, false));*/
-			URLPool.getInstance().pushURL("http://sz.lianjia.com/ershoufang/hu1de2de1pg1co52y4l2l3a2a3a4a5p2p3p4p5/");
+			URLPool.getInstance().pushURL("http://sz.lianjia.com/ershoufang/sf1hu1de2de1pg1y4l2l3a3a4p3p4/");//68PG
 			lianJiaDocParser = new LianJiaDocParser();
 		} else {
 			URLPool.getInstance().pushURL("http://sz.lianjia.com/chengjiao/sf1de2de1y4pg1l2l3ba60ea100bp300ep450/");
@@ -94,6 +94,7 @@ public class Monitor {
 				if (list== null || list.size()==0){
 					content = NetUtils.httpGet(URL);
 					doc = Jsoup.parse(content);
+					doc.setBaseUri(uri.getScheme()+ "://"+ uri.getHost());
 					list = lianJiaDocParser.getHouseList(doc);
 				}
 				for(LianJiaHouse house : list){

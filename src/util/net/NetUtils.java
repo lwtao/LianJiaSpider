@@ -24,7 +24,7 @@ public class NetUtils {
 	
 	public static String httpGet(String pageUrl) throws Exception{
 		HttpHeader httpHeader = new HttpHeader();
-		httpHeader.addParam("Cookie","lianjia_ssid=46fd9620-52f4-4ac3-b837-a7ef15896803; lianjia_uuid=4b9629fe-0dc3-4375-b0d4-9a53f97ab3fb");
+		httpHeader.addParam("Cookie","lianjia_ssid=033c8527-2b6b-43fb-bb97-5f482b7e5451; lianjia_uuid=4b9629fe-0dc3-4375-b0d4-9a53f97ab3fb");
 		return getAction(pageUrl, httpHeader);
 	}
 	

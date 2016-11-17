@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 public class LianJiaDocParser {
 
-    private static String houseListSelector = "ul.listContent> li";
+    private static String houseListSelector = "ul.sellListContent> li";
 
     public boolean canDuplicate = true;
 
@@ -95,6 +95,9 @@ public class LianJiaDocParser {
             if (Integer.parseInt(currentPage) <= 100 && !currentPage.equals(totalPage)) {
                 String nextPage = String.valueOf((Integer.valueOf(currentPage) + 1));
                 String nextURL = hrefTemplet.replace("{page}", nextPage);
+                if (StringUtils.isBlank(nextURL)){
+                    System.out.println("---------------currentPage:"+currentPage);
+                }
                 // System.out.println("URL ADD:"+nextURL);
                 URLPool.getInstance().pushURL(nextURL);
             }
@@ -146,6 +149,16 @@ public class LianJiaDocParser {
         year = StringUtils.substringBefore(year, "年");
         // System.out.println("-------"+ price);
         System.out.println("-------" + communityName + "," + areaInfo + "," + price + "," + year);
+        Elements elements = detailDocument.select(".transaction .content ul>li");
+        String houseCode = "";//房源编码
+        if (elements!=null){
+            for (Element element : elements) {
+                if (element.text().contains("房源编码")){
+                    houseCode = element.text().replace("房源编码","");
+                    break;
+                }
+            }
+        }
         LianJiaHouse house = new LianJiaHouse();
         house.setHouseId(houseId);
         house.setHouseTitle(houseTitle);
@@ -158,7 +171,7 @@ public class LianJiaDocParser {
         house.setPricePerSquare(pricePerSquare);
         // house.setDown(isDown);
         house.setHouseURL(detailUrl);
-        // house.setRegionURL(regionURL);
+        house.setRegionURL(houseCode);
         house.setHouseType(houseType);
         house.setHouseHeight(houseHeight);
         house.setHouseBuildType(houseLocation);
