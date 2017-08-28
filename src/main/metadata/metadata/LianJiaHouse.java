@@ -4,6 +4,7 @@ public class LianJiaHouse {
 	private String houseId;
 	private String houseTitle;
 	private String houseLocation;
+	private String communityId;
 	private String houseRoom;
 	private String houseArea;
 	private String houseDirection;
@@ -12,15 +13,73 @@ public class LianJiaHouse {
 	private String houseURL;
 	private String regionURL;
 	private boolean isDown;
+	private String createDate;
 	private String houseType;
 	private String houseHeight;
 	private String houseBuildYear;
 	private String houseBuildType;
-	
-	
-	
-	
-	
+	private String listingDate;
+	private int status;
+	private int seeTimes;
+	private int seeTimesLastWeek;
+	private String city;
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getCommunityId() {
+		return communityId;
+	}
+
+	public void setCommunityId(String communityId) {
+		this.communityId = communityId;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getListingDate() {
+		return listingDate;
+	}
+
+	public void setListingDate(String listingDate) {
+		this.listingDate = listingDate;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public int getSeeTimes() {
+		return seeTimes;
+	}
+
+	public void setSeeTimes(int seeTimes) {
+		this.seeTimes = seeTimes;
+	}
+
+	public int getSeeTimesLastWeek() {
+		return seeTimesLastWeek;
+	}
+
+	public void setSeeTimesLastWeek(int seeTimesLastWeek) {
+		this.seeTimesLastWeek = seeTimesLastWeek;
+	}
+
 	public String getHouseType() {
 		return houseType;
 	}
@@ -111,6 +170,31 @@ public class LianJiaHouse {
 	public void setHouseDirection(String houseDirection) {
 		this.houseDirection = houseDirection;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "LianJiaHouse{" +
+				"houseId='" + houseId + '\'' +
+				", houseTitle='" + houseTitle + '\'' +
+				", houseLocation='" + houseLocation + '\'' +
+				", communityId='" + communityId + '\'' +
+				", houseRoom='" + houseRoom + '\'' +
+				", houseArea='" + houseArea + '\'' +
+				", houseDirection='" + houseDirection + '\'' +
+				", housePrice='" + housePrice + '\'' +
+				", pricePerSquare='" + pricePerSquare + '\'' +
+				", houseURL='" + houseURL + '\'' +
+				", regionURL='" + regionURL + '\'' +
+				", isDown=" + isDown +
+				", houseType='" + houseType + '\'' +
+				", houseHeight='" + houseHeight + '\'' +
+				", houseBuildYear='" + houseBuildYear + '\'' +
+				", houseBuildType='" + houseBuildType + '\'' +
+				", listingDate='" + listingDate + '\'' +
+				", status=" + status +
+				", seeTimes=" + seeTimes +
+				", seeTimesLastWeek=" + seeTimesLastWeek +
+				", city='" + city + '\'' +
+				'}';
+	}
 }
